@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "http://mvnrepository.com/" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'sandy'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "http://mvnrepository.com/" }
+}
+bootRepackage {
+    mainClass = 'com.Application'
+}
+dependencies {
+
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile 'joda-time:joda-time:2.9.9'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'io.springfox:springfox-swagger2:2.7.0'
+    compile 'io.springfox:springfox-swagger-ui:2.7.0'
+    compile 'com.google.guava:guava:22.0'
+    compile 'com.alibaba:druid-spring-boot-starter:1.1.1'
+    compile 'com.baomidou:mybatis-plus:2.1-gamma'
+    compile 'com.alibaba:fastjson:1.2.9'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
