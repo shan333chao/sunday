@@ -11,35 +11,14 @@
                 <pattern>${PATTERN}</pattern>
             </encoder>
         </appender>
-        <logger name="com.roncoo.education" level="debug"/>
-        <root level="info">
+        <root level="debug">
             <appender-ref ref="CONSOLE" />
         </root>
     </springProfile>
     <!-- 测试环境 -->
     <springProfile name="test">
         <!-- 每天产生一个文件 -->
-        <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <Prudent>true</Prudent>
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <FileNamePattern>${logstash.path}/sunday.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                    <maxFileSize>500MB</maxFileSize>
-                </timeBasedFileNamingAndTriggeringPolicy>
-                <maxHistory>15</maxHistory>
-            </rollingPolicy>
-            <layout class="ch.qos.logback.classic.PatternLayout">
-                <Pattern>${PATTERN}</Pattern>
-            </layout>
-        </appender>
-        <root level="info">
-            <appender-ref ref="TEST-FILE" />
-        </root>
-    </springProfile>
-    <!-- 生产环境 -->
-    <springProfile name="prd">
-        <!-- 每天产生一个文件 -->
-        <appender name="TEST-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <Prudent>true</Prudent>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
                 <FileNamePattern>${logstash.path}/sunday.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
@@ -53,7 +32,27 @@
             </layout>
         </appender>
         <root level="debug">
-            <appender-ref ref="TEST-FILE" />
+            <appender-ref ref="LOGFILE" />
+        </root>
+    </springProfile>
+    <!-- 生产环境 -->
+    <springProfile name="prd">
+        <!-- 每天产生一个文件 -->
+        <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <Prudent>true</Prudent>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${logstash.path}/sunday.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>500MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <Pattern>${PATTERN}</Pattern>
+            </layout>
+        </appender>
+        <root level="info">
+            <appender-ref ref="LOGFILE" />
         </root>
     </springProfile>
 </configuration>
